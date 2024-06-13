@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @Entity
 @Table(name = "schedule")
@@ -28,6 +30,9 @@ public class Schedule extends Timestamped{
     @Column(nullable = false, length = 500)
     private String description;
 
+    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Comment> comments;
+
     public Schedule(String username, String password, String title, String description) {
         this.username = username;
         this.password = password;
@@ -46,7 +51,4 @@ public class Schedule extends Timestamped{
             this.description = description;
         }
     }
-
-
-
 }
