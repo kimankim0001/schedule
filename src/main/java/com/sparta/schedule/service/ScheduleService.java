@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -30,5 +33,9 @@ public class ScheduleService {
         return scheduleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 ID에 맞는 일정이 없습니다."));
     }
 
-
+    // 전체 일정조회
+    public List<ScheduleResponseDto> findAllSchedule() {
+        List<Schedule> schedules = scheduleRepository.findAll();
+        return schedules.stream().sorted(Comparator.comparing(Schedule::getCreatedAt).reversed()).map(ScheduleResponseDto::toDto).toList();
+    }
 }
