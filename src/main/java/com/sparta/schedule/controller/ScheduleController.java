@@ -26,7 +26,7 @@ public class ScheduleController {
 
     // 선택한 일정조회
     @GetMapping("/schedules/{id}")
-    public ResponseEntity<ScheduleResponseDto> findScheduleById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<ScheduleResponseDto> findScheduleById(@PathVariable(name = "id") long id) {
         return ResponseEntity.ok().body(scheduleService.findScheduleById(id));
     }
 
@@ -34,5 +34,11 @@ public class ScheduleController {
     @GetMapping("/schedules")
     public ResponseEntity<List<ScheduleResponseDto>> findAllSchedule() {
         return ResponseEntity.ok().body(scheduleService.findAllSchedule());
+    }
+
+    // 선택한 일정수정
+    @PatchMapping("/schedules/{id}")
+    public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable(name = "id") long id, @Valid @RequestBody ScheduleCreateRequestDto requestDto){
+        return ResponseEntity.ok().body(scheduleService.updateSchedule(id, requestDto));
     }
 }

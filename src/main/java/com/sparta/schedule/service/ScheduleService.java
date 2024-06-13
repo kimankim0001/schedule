@@ -38,4 +38,15 @@ public class ScheduleService {
         List<Schedule> schedules = scheduleRepository.findAll();
         return schedules.stream().sorted(Comparator.comparing(Schedule::getCreatedAt).reversed()).map(ScheduleResponseDto::toDto).toList();
     }
+
+    // 선택한 일정수정
+    @Transactional
+    public ScheduleResponseDto updateSchedule(long id, ScheduleCreateRequestDto requestDto) {
+        Schedule schedule = findById(id);
+        if (!schedule.getPassword().equals(requestDto.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 다릅니다.");
+        }
+        schedule.updateSchedule(requestDto.getUsername(), requestDto.getTitle(), requestDto.getDescription());
+        return ScheduleResponseDto.toDto(schedule);
+    }
 }

@@ -35,6 +35,18 @@ public class Schedule extends Timestamped{
         this.description = description;
     }
 
+    public void updateSchedule(String username, String title, String description){
+        if (username != null && !username.isBlank()){
+            this.username = username;
+        }
+        if (title != null && !title.isBlank()){
+            this.title = title;
+        }
+        if (description != null && !description.isBlank()){
+            this.description = description;
+        }
+    }
+
 
 
 }
