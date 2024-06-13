@@ -1,7 +1,9 @@
 package com.sparta.schedule.controller;
 
 import com.sparta.schedule.dto.ScheduleCreateRequestDto;
+import com.sparta.schedule.dto.ScheduleDeleteRequestDto;
 import com.sparta.schedule.dto.ScheduleResponseDto;
+import com.sparta.schedule.dto.ScheduleUpdateRequestDto;
 import com.sparta.schedule.service.ScheduleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,13 +40,13 @@ public class ScheduleController {
 
     // 선택한 일정수정
     @PatchMapping("/schedules/{id}")
-    public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable(name = "id") long id, @Valid @RequestBody ScheduleCreateRequestDto requestDto){
+    public ResponseEntity<ScheduleResponseDto> updateSchedule(@PathVariable(name = "id") long id, @Valid @RequestBody ScheduleUpdateRequestDto requestDto){
         return ResponseEntity.ok().body(scheduleService.updateSchedule(id, requestDto));
     }
 
     // 선택한 일정삭제
     @DeleteMapping("/schedules/{id}")
-    public ResponseEntity<String> deleteSchedule(@PathVariable(name = "id") long id, @Valid @RequestBody ScheduleCreateRequestDto requestDto) {
+    public ResponseEntity<String> deleteSchedule(@PathVariable(name = "id") long id, @Valid @RequestBody ScheduleDeleteRequestDto requestDto) {
         scheduleService.deleteSchedule(id, requestDto);
         return ResponseEntity.ok().body("성공적으로 삭제되었습니다.");
     }

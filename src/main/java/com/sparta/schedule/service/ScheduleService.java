@@ -1,7 +1,9 @@
 package com.sparta.schedule.service;
 
 import com.sparta.schedule.dto.ScheduleCreateRequestDto;
+import com.sparta.schedule.dto.ScheduleDeleteRequestDto;
 import com.sparta.schedule.dto.ScheduleResponseDto;
+import com.sparta.schedule.dto.ScheduleUpdateRequestDto;
 import com.sparta.schedule.entity.Schedule;
 import com.sparta.schedule.repository.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +44,7 @@ public class ScheduleService {
 
     // 선택한 일정수정
     @Transactional
-    public ScheduleResponseDto updateSchedule(long id, ScheduleCreateRequestDto requestDto) {
+    public ScheduleResponseDto updateSchedule(long id, ScheduleUpdateRequestDto requestDto) {
         Schedule schedule = findById(id);
         if (!schedule.getPassword().equals(requestDto.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 다릅니다.");
@@ -53,7 +55,7 @@ public class ScheduleService {
 
     // 선택한 일정삭제
     @Transactional
-    public void deleteSchedule(long id, ScheduleCreateRequestDto requestDto) {
+    public void deleteSchedule(long id, ScheduleDeleteRequestDto requestDto) {
         Schedule schedule = findById(id);
         if (!Objects.equals(schedule.getPassword(), requestDto.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 다릅니다.");
