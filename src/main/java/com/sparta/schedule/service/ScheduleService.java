@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -48,5 +49,15 @@ public class ScheduleService {
         }
         schedule.updateSchedule(requestDto.getUsername(), requestDto.getTitle(), requestDto.getDescription());
         return ScheduleResponseDto.toDto(schedule);
+    }
+
+    // 선택한 일정삭제
+    @Transactional
+    public void deleteSchedule(long id, ScheduleCreateRequestDto requestDto) {
+        Schedule schedule = findById(id);
+        if (!Objects.equals(schedule.getPassword(), requestDto.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 다릅니다.");
+        }
+        scheduleRepository.delete(schedule);
     }
 }
