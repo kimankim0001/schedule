@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Table(name = "comment")
-public class Comment extends Timestamped{
+public class Comment extends Timestamped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,10 +25,14 @@ public class Comment extends Timestamped{
     @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 
-    public Comment(String username, String comment, Schedule schedule){
+    public Comment(String username, String comment, Schedule schedule) {
         this.username = username;
         this.comment = comment;
         this.schedule = schedule;
+    }
+
+    public void updateComment(String comment) {
+        this.comment = comment;
     }
 
 
