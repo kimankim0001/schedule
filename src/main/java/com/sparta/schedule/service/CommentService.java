@@ -1,6 +1,7 @@
 package com.sparta.schedule.service;
 
 import com.sparta.schedule.dto.CommentCreateRequestDto;
+import com.sparta.schedule.dto.CommentDeleteRequestDto;
 import com.sparta.schedule.dto.CommentResponseDto;
 import com.sparta.schedule.dto.CommentUpdateRequestDto;
 import com.sparta.schedule.entity.Comment;
@@ -39,10 +40,24 @@ public class CommentService {
         Comment comment = findCommentById(commentId);
         // 댓글 작성자와 사용자가 일치하지 않는 경우
         if (!Objects.equals(comment.getUsername(), requestDto.getUsername())) {
-            throw new IllegalArgumentException("선택한 댓글의 사용자가 현재 사용자와 불일치합니다");
+            throw new IllegalArgumentException("선택한 댓글의 사용자가 현재 사용자와 불일치하여 수정할 수 없습니다.");
         }
         comment.updateComment(requestDto.getComment());
         return CommentResponseDto.toDto(comment);
+    }
+
+    //선택한 댓글 삭제
+    @Transactional
+    public void deleteComment(long scheduleId, long commentId, CommentDeleteRequestDto requestDto) {
+        // DB에 일정이 존재하지 않는 경우
+        scheduleService.findById(scheduleId);
+        // DB에 댓글이 존재하지 않는 경우
+        Comment comment = findCommentById(commentId);
+        // 댓글 작성자와 사용자가 일치하지 않는 경우
+        if (!Objects.equals(comment.getUsername(), requestDto.getUsername())) {
+            throw new IllegalArgumentException("선택한 댓글의 사용자가 현재 사용자와 불일치하여 삭제할 수 없습니다.");
+        }
+        commentRepository.delete(comment);
     }
 
     // 댓글 존재하는지 체크하는 메서드
