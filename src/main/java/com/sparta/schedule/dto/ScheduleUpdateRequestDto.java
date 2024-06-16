@@ -1,14 +1,15 @@
 package com.sparta.schedule.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Getter;
-
+@Builder
 @Getter
 public class ScheduleUpdateRequestDto {
 
     private String username;
 
-    @NotNull
+    @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
 
     private String title;
