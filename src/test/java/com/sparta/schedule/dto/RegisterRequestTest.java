@@ -40,5 +40,23 @@ class RegisterRequestTest {
         }
     }
 
+    @Test
+    @DisplayName("password 공백 테스트")
+    void password_validation() {
+        //given
+        RegisterRequest registerRequest =
+                RegisterRequest.builder()
+                        .username("test1234")
+                        .password(" ")
+                        .build();
+        //when
+        Set<ConstraintViolation<RegisterRequest>> violations = validator.validate(registerRequest);
+        //then
+        for (ConstraintViolation<RegisterRequest> violation : violations) {
+            System.err.println(violation.getMessage());
+        }
+    }
+
+
 
 }
