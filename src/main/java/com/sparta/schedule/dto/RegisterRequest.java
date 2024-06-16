@@ -2,8 +2,9 @@ package com.sparta.schedule.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Getter;
-
+@Builder
 @Getter
 public class RegisterRequest {
     @NotBlank(message = "사용자 이름은 필수입니다.")
