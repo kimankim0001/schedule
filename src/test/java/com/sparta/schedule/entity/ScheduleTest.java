@@ -22,7 +22,7 @@ class ScheduleTest {
 
     @Test
     @DisplayName("password / title 실패 테스트")
-    void passwordTitleValidationSuccess() {
+    void passwordTitleValidationFailure() {
         //given
         Schedule schedule = new Schedule();
         schedule.setUsername("테스트유저");
@@ -39,7 +39,7 @@ class ScheduleTest {
 
     @Test
     @DisplayName("password / title 성공 테스트")
-    void passwordTitleValidationFaileure() {
+    void passwordTitleValidationSuccess() {
         //given
         Schedule schedule = new Schedule();
         schedule.setUsername("테스트유저");
