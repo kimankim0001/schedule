@@ -25,7 +25,7 @@ class RegisterRequestTest {
 
     @Test
     @DisplayName("username 공백 테스트")
-    void username_validation() {
+    void usernameValidation() {
         //given
         RegisterRequest registerRequest =
                 RegisterRequest.builder()
@@ -42,7 +42,7 @@ class RegisterRequestTest {
 
     @Test
     @DisplayName("password 공백 테스트")
-    void password_validation() {
+    void passwordValidation() {
         //given
         RegisterRequest registerRequest =
                 RegisterRequest.builder()

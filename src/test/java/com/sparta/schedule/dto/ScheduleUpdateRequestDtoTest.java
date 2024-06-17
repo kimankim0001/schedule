@@ -23,7 +23,7 @@ class ScheduleUpdateRequestDtoTest {
 
     @Test
     @DisplayName("password 공백 테스트")
-    void password_validation() {
+    void passwordValidation() {
         //given
         ScheduleUpdateRequestDto scheduleUpdateRequestDto =
                 ScheduleUpdateRequestDto.builder()
